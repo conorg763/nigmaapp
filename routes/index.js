@@ -7,6 +7,7 @@ var jwt = require('express-jwt');
 var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
 var User = mongoose.model('User');
+var Job = mongoose.model('Job');
 
 var auth = jwt({secret: 'SECRET',userProperty:'payload'}); //remember to change token to variable instead of hard coding
 
@@ -15,12 +16,23 @@ router.get('/',function(req,res) {
   res.render('index');
 });
 
+//get posts for Code Page
 router.get('/posts', function(req, res, next) {
   Post.find(function(err, posts){
     if(err){ return next(err); }
 
     res.json(posts);
   });
+});
+
+//get jobs for Career Page
+router.get('/jobs',function(req,res,next) {
+  console.log("I received a GET request");
+  Job.find(function (err,jobs) {
+    if(err){ return next(err); }
+    res.json(jobs);
+  })
+
 });
 
 //create new post

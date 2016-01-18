@@ -1,3 +1,15 @@
-/**
- * Created by work on 18/01/16.
- */
+var mongoose = require('mongoose');
+
+var JobSchema = new mongoose.Schema({
+    jobTitle: String,
+    company: String,
+    location: String,
+    jobType: String,
+    jobDescription: String,
+    salary: String,
+    apply: String
+
+});
+
+
+mongoose.model('Job',JobSchema);

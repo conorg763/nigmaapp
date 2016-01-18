@@ -76,7 +76,7 @@ app.config([
                 url: '/career',
                 templateUrl: '/career.html',
                 controller: 'CareerCtrl',
-                onEnter: ['$state','auth',function($state,auth) {
+                onEnter: ['$state','auth','$http',function($state,auth,$http) {
                     if(auth.isLoggedIn()) {
                         $state.go('home');
                     }
@@ -93,11 +93,6 @@ app.config([
                     }
                 }]
             });
-
-
-
-
-
 
         $urlRouterProvider.otherwise('home');
     }]);
@@ -307,7 +302,14 @@ app.controller('CodeCtrl',[
 app.controller('CareerCtrl',[
     '$scope',
     'auth',
-    function($scope,auth) {
+    '$http',
+    function($scope,auth,$http) {
+        console.log("Hello from controller");
+        $http.get('/jobs').success(function(response) {
+            console.log("I got data I requested");
+            $scope.jobs = response;
+        });
+
 
     }
 ]);

@@ -1,5 +1,32 @@
 <div class="container">
-    <div class="jumbotron">
-        <h2>Coming in PHASE 2</h2>
+    <div class="jumbotron" ng-controller="CareerCtrl">
+        <h2>Add Job:</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Job Title:</th>
+                <th>Company:</th>
+                <th>Location:</th>
+                <th>Job Type:</th>
+                <th>Job Description:</th>
+                <th>Salary</th>
+                <th>Apply via:</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="job in jobs">
+                <td>{{job.jobTitle}}</td>
+                <td>{{job.company}}</td>
+                <td>{{job.location}}</td>
+                <td>{{job.jobType}}</td>
+                <td>{{job.jobDescription}}</td>
+                <td>{{job.salary}}</td>
+                <td>{{job.apply}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <p>Job List</p>
+        <input ng-model="test">
+        {{test}}
     </div>
 </div>
