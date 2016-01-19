@@ -27,13 +27,14 @@
                 <td><button class="btn btn-primary" ng-click="addJob()">Add Job</button></td>
             </tr>
             <tr ng-repeat="job in jobs">
-                <td>{{job.jobTitle}}</td>
+                <td>{{job.Title}}</td>
                 <td>{{job.company}}</td>
                 <td>{{job.location}}</td>
                 <td>{{job.jobType}}</td>
                 <td>{{job.jobDescription}}</td>
                 <td>{{job.salary}}</td>
                 <td>{{job.apply}}</td>
+                <td><button class="btn btn-danger" ng-click="remove(job._id)">Remove</button></td>
             </tr>
             </tbody>
         </table>

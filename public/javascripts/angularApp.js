@@ -1,102 +1,3 @@
-var app = angular.module('nigma', ['ui.router']);
-
-app.config([
-    '$stateProvider',
-    '$urlRouterProvider',
-    function($stateProvider, $urlRouterProvider) {
-
-        $stateProvider
-            .state('home', {
-                url: '/home',
-                templateUrl: '/home.html',
-                controller: 'MainCtrl',
-                resolve: {
-                    postPromise: ['posts', function(posts){
-                        return posts.getAll();
-                    }]
-                }
-            })
-
-            .state('posts', {
-                url: '/posts/:id',
-                templateUrl: '/posts.html',
-                controller: 'PostsCtrl',
-                resolve: {
-                    post: ['$stateParams', 'posts', function($stateParams, posts) {
-                        return posts.get($stateParams.id);
-                    }]
-                }
-            })
-
-            .state('login', {
-                url: '/login',
-                templateUrl: '/login.html',
-                controller: 'AuthCtrl',
-                onEnter: ['$state', 'auth', function($state, auth){
-                    if(auth.isLoggedIn()){
-                        $state.go('home');
-                    }
-                }]
-            })
-
-            .state('register', {
-                url: '/register',
-                templateUrl: '/register.html',
-                controller: 'AuthCtrl',
-                onEnter: ['$state', 'auth', function($state, auth){
-                    if(auth.isLoggedIn()){
-                        $state.go('home');
-                    }
-                }]
-            })
-
-            .state('connect', {
-                url: '/connect',
-                templateUrl: '/connect.html',
-                controller: 'ConnectCtrl',
-                onEnter: ['$state','auth',function($state,auth) {
-                    if(auth.isLoggedIn()) {
-                        $state.go('home');
-                    }
-                }]
-            })
-
-            .state('code', {
-                url: '/code',
-                templateUrl: '/code.html',
-                controller: 'CodeCtrl',
-                onEnter: ['$state','auth',function($state,auth) {
-                    if(auth.isLoggedIn()) {
-                        $state.go('home');
-                    }
-                }]
-            })
-
-            .state('career', {
-                url: '/career',
-                templateUrl: '/career.html',
-                controller: 'CareerCtrl',
-                onEnter: ['$state','auth','$http',function($state,auth,$http) {
-                    if(auth.isLoggedIn()) {
-                        $state.go('home');
-                    }
-                }]
-            })
-
-            .state('community', {
-                url: '/community',
-                templateUrl: '/community.html',
-                controller: 'CommunityCtrl',
-                onEnter: ['$state','auth',function($state,auth) {
-                    if(auth.isLoggedIn()) {
-                        $state.go('home');
-                    }
-                }]
-            });
-
-        $urlRouterProvider.otherwise('home');
-    }]);
-
 app.factory('auth',['$http','$window',function($http,$window) {
     var auth = {};
     auth.saveToken = function(token) {
@@ -193,6 +94,38 @@ app.factory('posts', ['$http','auth',function($http,auth){
             });
     };
     return o;  //possibly remove
+}]);
+
+app.factory('jobs', ['$http','auth',function($http,auth){
+    var jobs = {};
+    //   $http.get('/jobs').success(function(response) {
+    //        $scope.jobs = response;
+    //        $scope.job = "";
+    //    });
+    jobs.getAll = function() {
+        return $http.get('/jobs').success(function(res) {
+            return res.data;
+        });
+    };
+
+    jobs.create = function(job) {
+        return $http.post('/jobs', job, {
+            headers: {Authorization: 'Bearer ' + auth.getToken()}
+        }).success(function(data){
+            jobs.job.push(data);
+            return job;
+        });
+    };
+
+    jobs.get = function(id) {
+        //use the express route to grab post and return res
+        return $http.get('/jobs/' + id).then(function(res) {
+            return res.data;
+        })
+    };
+
+
+    return jobs;  //possibly remove
 }]);
 
 
@@ -301,23 +234,26 @@ app.controller('CodeCtrl',[
 
 app.controller('CareerCtrl',[
     '$scope',
+    'jobs',
     'auth',
-    '$http',
-    function($scope,auth,$http) {
-        console.log("Hello from controller");
+    function($scope,jobs,auth) {
+        jobs.getAll()
+            .then(function(jobData) {
+                $scope.jobs = jobData.data;
+            })
 
-            $http.get('/jobs').success(function(response) {
-                console.log("I got data I requested");
-                $scope.jobs = response;
-                $scope.job = "";
-            });
-
-        $scope.addJob = function() {
-            console.log($scope.job);
-            $http.post('/jobs',$scope.job).success(function(response) {
-                $scope.jobs.push(response);
-            });
-        };
+        //   $http.get('/jobs').success(function(response) {
+        //        console.log("I got data I requested");
+        //        $scope.jobs = response;
+        //        $scope.job = "";
+        //    });
+        //
+        //$scope.addJob = function() {
+        //    console.log($scope.job);
+        //    $http.post('/jobs',$scope.job).success(function(response) {
+        //        $scope.jobs.push(response);
+        //    });
+        //};
 
 
     }
