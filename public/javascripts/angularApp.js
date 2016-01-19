@@ -305,10 +305,19 @@ app.controller('CareerCtrl',[
     '$http',
     function($scope,auth,$http) {
         console.log("Hello from controller");
-        $http.get('/jobs').success(function(response) {
-            console.log("I got data I requested");
-            $scope.jobs = response;
-        });
+
+            $http.get('/jobs').success(function(response) {
+                console.log("I got data I requested");
+                $scope.jobs = response;
+                $scope.job = "";
+            });
+
+        $scope.addJob = function() {
+            console.log($scope.job);
+            $http.post('/jobs',$scope.job).success(function(response) {
+                $scope.jobs.push(response);
+            });
+        };
 
 
     }

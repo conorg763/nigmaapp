@@ -35,6 +35,15 @@ router.get('/jobs',function(req,res,next) {
 
 });
 
+//add job
+router.post('/jobs',function(req,res,next) {
+  var job = new Job(req.body);
+  job.save(function(err,job) {
+    if(err){ return next(err); }
+    res.json(job);
+  })
+});
+
 //create new post
 router.post('/posts',auth, function(req, res, next) {
   var post = new Post(req.body);
