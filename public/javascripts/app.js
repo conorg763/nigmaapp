@@ -75,7 +75,7 @@ app.config([
             .state('career', {
                 url: '/career',
                 templateUrl: '/career.html',
-                controller: 'CareerCtrl',
+                controller: 'JobsCtrl',
                 onEnter: ['$state','auth','$http',function($state,auth,$http) {
                     if(auth.isLoggedIn()) {
                         $state.go('home');
