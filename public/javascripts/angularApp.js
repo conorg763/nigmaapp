@@ -97,23 +97,22 @@ app.factory('posts', ['$http','auth',function($http,auth){
 }]);
 
 app.factory('jobs', ['$http','auth',function($http,auth){
-    var jobs = {};
-    //   $http.get('/jobs').success(function(response) {
-    //        $scope.jobs = response;
-    //        $scope.job = "";
-    //    });
+    var jobs = {
+        jobs: []
+    };
+
     jobs.getAll = function() {
         return $http.get('/jobs').success(function(res) {
             return res.data;
+
         });
     };
 
     jobs.create = function(job) {
-        return $http.post('/jobs', job, {
-            headers: {Authorization: 'Bearer ' + auth.getToken()}
-        }).success(function(data){
-            jobs.job.push(data);
+        return $http.post('/jobs',job).then(function(res){
+            jobs.jobs.push(job);
             return job;
+
         });
     };
 
@@ -123,6 +122,7 @@ app.factory('jobs', ['$http','auth',function($http,auth){
             return res.data;
         })
     };
+
 
 
     return jobs;  //possibly remove
@@ -240,20 +240,36 @@ app.controller('CareerCtrl',[
         jobs.getAll()
             .then(function(jobData) {
                 $scope.jobs = jobData.data;
-            })
+            });
 
-        //   $http.get('/jobs').success(function(response) {
-        //        console.log("I got data I requested");
-        //        $scope.jobs = response;
-        //        $scope.job = "";
-        //    });
-        //
-        //$scope.addJob = function() {
-        //    console.log($scope.job);
-        //    $http.post('/jobs',$scope.job).success(function(response) {
-        //        $scope.jobs.push(response);
-        //    });
-        //};
+        $scope.addJob = function(){
+            jobs.create({
+                jobTitle: $scope.jobTitle,
+                company: $scope.company,
+                location: $scope.location,
+                jobType: $scope.jobType,
+                jobDescription: $scope.jobType,
+                salary: $scope.salary,
+                apply: $scope.apply
+
+
+            })
+            .then(function(job) {
+            $scope.jobs.push(job)
+            })
+                .catch(function(err) {
+                    console.log(err);
+                });
+            //clears values
+            $scope.jobTitle = '';
+            $scope.company = '';
+            $scope.location = '';
+            $scope.jobType = '';
+            $scope.jobType = '';
+            $scope.salary = '';
+            $scope.apply = '';
+
+        };
 
 
     }

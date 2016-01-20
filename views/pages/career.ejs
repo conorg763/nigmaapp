@@ -17,17 +17,17 @@
             </thead>
             <tbody>
             <tr>
-                <td><input class="form-control" ng-model="job.jobTitle"></td>
-                <td><input class="form-control" ng-model="job.company"></td>
-                <td><input class="form-control" ng-model="job.location"></td>
-                <td><input class="form-control" ng-model="job.jobType"></td>
-                <td><input class="form-control" ng-model="job.jobDescription"></td>
-                <td><input class="form-control" ng-model="job.salary"></td>
-                <td><input class="form-control" ng-model="job.apply"></td>
+                <td><input class="form-control" ng-model="jobTitle"></td>
+                <td><input class="form-control" ng-model="company"></td>
+                <td><input class="form-control" ng-model="location"></td>
+                <td><input class="form-control" ng-model="jobType"></td>
+                <td><input class="form-control" ng-model="jobDescription"></td>
+                <td><input class="form-control" ng-model="salary"></td>
+                <td><input class="form-control" ng-model="apply"></td>
                 <td><button class="btn btn-primary" ng-click="addJob()">Add Job</button></td>
             </tr>
             <tr ng-repeat="job in jobs">
-                <td>{{job.Title}}</td>
+                <td>{{job.jobTitle}}</td>
                 <td>{{job.company}}</td>
                 <td>{{job.location}}</td>
                 <td>{{job.jobType}}</td>
