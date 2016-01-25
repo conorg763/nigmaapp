@@ -92,7 +92,41 @@ app.config([
                         $state.go('home');
                     }
                 }]
+            })
+
+            .state('viewJob', {
+                url: '/viewJob/:id',
+                templateUrl: '/viewJob.html',
+                controller: 'viewJobCtrl',
+                onEnter: ['$state','auth',function($state,auth) {
+                    if(auth.isLoggedIn()) {
+                        $state.go('home');
+                    }
+                }]
+            })
+
+            .state('editJob', {
+                url: '/editJob/:id',
+                templateUrl: '/editJob.html',
+                controller: 'editJobCtrl',
+                onEnter: ['$state','auth',function($state,auth) {
+                    if(auth.isLoggedIn()) {
+                        $state.go('home');
+                    }
+                }]
+            })
+            .state('addJob', {
+                url: '/addJob',
+                templateUrl: '/addJob.html',
+                controller: 'addJobCtrl',
+                onEnter: ['$state','auth',function($state,auth) {
+                    if(auth.isLoggedIn()) {
+                        $state.go('home');
+                    }
+                }]
             });
+
+
 
         $urlRouterProvider.otherwise('home');
     }]);

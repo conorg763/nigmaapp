@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="jumbotron" ng-controller="viewJobCtrl">
+        <form class="form-horizontal">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend><h2>View Job</h2></legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Job Title</label>
+                    <div class="col-md-5">
+                    {{job.jobTitle}}
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Company</label>
+                    <div class="col-md-5">
+                        {{job.company}}
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Location</label>
+                    <div class="col-md-2">
+                        {{job.location}}
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Job Type</label>
+                    <div class="col-md-5">
+                        {{job.jobType}}
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Job Description</label>
+                    <div class="col-md-5">
+                        {{job.jobDescription}}
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Salary</label>
+                    <div class="col-md-2">
+                        {{job.salary}}
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">How to Apply</label>
+                    <div class="col-md-4">
+                        {{job.apply}}
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-lg" ui-sref="editJob({id: job._id})">Edit Job</button>
+            </fieldset>
+        </form>
+
+    </div>
+
+</div>

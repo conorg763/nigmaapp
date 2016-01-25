@@ -27,7 +27,6 @@ router.get('/posts', function(req, res, next) {
 
 //get jobs for Career Page
 router.get('/jobs',function(req,res,next) {
-  console.log("I received a GET request");
   Job.find(function (err,jobs) {
     if(err){ return next(err); }
     res.json(jobs);
@@ -40,6 +39,24 @@ router.post('/jobs',function(req,res,next) {
   var job = new Job(req.body);
   job.save(function(err,job) {
     if(err){ return next(err); }
+    res.json(job);
+  })
+});
+
+router.post('/jobs/query',function(req,res,next) {
+  var query = req.body;
+  Job.find(query,function(err,jobs) {
+    if(err){ return next(err); }
+    res.json(jobs);
+  })
+});
+
+
+router.put('/editJob/:id',function (req,res,next) {
+  var jobTitle =  req.jobTitle;
+  var id = req.params.id;
+  Job.findById({id: id},{jobTitle: jobTitle},function(err,job) {
+    if(err) {return next(err);}
     res.json(job);
   })
 });

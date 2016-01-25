@@ -18,13 +18,17 @@ app.factory('jobs', ['$http','auth',function($http,auth){
         });
     };
 
-    jobs.get = function(id) {
-        //use the express route to grab post and return res
-        return $http.get('/jobs/' + id).then(function(res) {
-            return res.data;
+    jobs.find = function(query) {
+        return $http.post('/jobs/query',query).then(function(res) {
+                return res.data[0];
         })
     };
 
+    jobs.update = function(job) {
+        return $http.put('/editJob/' + job._id,job).then(function(res) {
+            return true;
+        })
+    };
 
 
     return jobs;  //possibly remove
@@ -39,36 +43,6 @@ app.controller('JobsCtrl',[
             .then(function(jobData) {
                 $scope.jobs = jobData.data;
             });
-
-        $scope.addJob = function(){
-            jobs.create({
-                jobTitle: $scope.jobTitle,
-                company: $scope.company,
-                location: $scope.location,
-                jobType: $scope.jobType,
-                jobDescription: $scope.jobType,
-                salary: $scope.salary,
-                apply: $scope.apply
-
-
-            })
-                .then(function(job) {
-                    $scope.jobs.push(job)
-                })
-                .catch(function(err) {
-                    console.log(err);
-                });
-            //clears values
-            $scope.jobTitle = '';
-            $scope.company = '';
-            $scope.location = '';
-            $scope.jobType = '';
-            $scope.jobType = '';
-            $scope.salary = '';
-            $scope.apply = '';
-
-        };
-
 
     }
 ]);

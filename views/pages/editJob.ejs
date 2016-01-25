@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="jumbotron" ng-controller="editJobCtrl">
+        <form class="form-horizontal">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend><h2>Edit Job</h2></legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Job Title</label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control input-md" ng-model="job.jobTitle">
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Company</label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control input-md" ng-model="job.company">
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Location</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control input-md" ng-model="job.location">
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">Job Type</label>
+                    <div class="col-md-5">
+                        <select class="form-control input-md" ng-model="job.jobType">
+                            <option value="Full-Time">Full-Time</option>
+                            <option value="Part-Time">Part-Time</option>
+                            <option value="Contract">Contract</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Job Description</label>
+                    <div class="col-md-5">
+                        <textarea rows="5" class="form-control input-md" ng-model="job.jobDescription"></textarea>
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Salary</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control input-md" ng-model="job.salary">
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">How to Apply</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-md" ng-model="job.apply">
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-lg" ng-click="updateJob(job)">Update</button>
+            </fieldset>
+        </form>
+
+    </div>
+
+</div>
