@@ -53,9 +53,9 @@ router.post('/jobs/query',function(req,res,next) {
 
 
 router.put('/editJob/:id',function (req,res,next) {
-  var jobTitle =  req.jobTitle;
+  var job =  req.body;
   var id = req.params.id;
-  Job.findById({id: id},{jobTitle: jobTitle},function(err,job) {
+  Job.findOneAndUpdate({_id: id},job,function(err,job) {
     if(err) {return next(err);}
     res.json(job);
   })

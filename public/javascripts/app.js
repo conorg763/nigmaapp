@@ -1,20 +1,16 @@
-var app = angular.module('nigma', ['ui.router']);
+var app = angular.module('nigma', ['ui.router','toastr','btford.socket-io']);
 
 app.config([
     '$stateProvider',
     '$urlRouterProvider',
+
     function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
             .state('home', {
                 url: '/home',
                 templateUrl: '/home.html',
-                controller: 'MainCtrl',
-                resolve: {
-                    postPromise: ['posts', function(posts){
-                        return posts.getAll();
-                    }]
-                }
+                controller: 'MainCtrl'
             })
 
             .state('posts', {
@@ -55,7 +51,7 @@ app.config([
                 templateUrl: '/connect.html',
                 controller: 'ConnectCtrl',
                 onEnter: ['$state','auth',function($state,auth) {
-                    if(auth.isLoggedIn()) {
+                    if(auth.logOut) {
                         $state.go('home');
                     }
                 }]
@@ -65,65 +61,70 @@ app.config([
                 url: '/code',
                 templateUrl: '/code.html',
                 controller: 'CodeCtrl',
-                onEnter: ['$state','auth',function($state,auth) {
-                    if(auth.isLoggedIn()) {
-                        $state.go('home');
-                    }
-                }]
+                //onEnter: ['$state','auth',function($state,auth) {
+                //    if(auth.isLoggedIn()) {
+                //        $state.go('home');
+                //    }
+                //}]
+                resolve: {
+                    postPromise: ['posts', function(posts){
+                        return posts.getAll();
+                    }]
+                }
             })
 
             .state('career', {
                 url: '/career',
                 templateUrl: '/career.html',
-                controller: 'JobsCtrl',
-                onEnter: ['$state','auth','$http',function($state,auth,$http) {
-                    if(auth.isLoggedIn()) {
-                        $state.go('home');
-                    }
-                }]
+                controller: 'JobsCtrl'
+                //onEnter: ['$state','auth','$http',function($state,auth,$http) {
+                //    if(auth.isLoggedIn()) {
+                //        $state.go('home');
+                //    }
+                //}]
             })
 
             .state('community', {
                 url: '/community',
                 templateUrl: '/community.html',
-                controller: 'CommunityCtrl',
-                onEnter: ['$state','auth',function($state,auth) {
-                    if(auth.isLoggedIn()) {
-                        $state.go('home');
-                    }
-                }]
+                controller: 'CommunityCtrl'
+                //onEnter: ['$state','auth',function($state,auth) {
+                //    if(auth.isLoggedIn()) {
+                //        $state.go('home');
+                //    }
+                //}]
             })
 
             .state('viewJob', {
                 url: '/viewJob/:id',
                 templateUrl: '/viewJob.html',
-                controller: 'viewJobCtrl',
-                onEnter: ['$state','auth',function($state,auth) {
-                    if(auth.isLoggedIn()) {
-                        $state.go('home');
-                    }
-                }]
+                controller: 'viewJobCtrl'
+                //onEnter: ['$state','auth',function($state,auth) {
+                //    if(auth.isLoggedIn()) {
+                //        $state.go('home');
+                //    }
+                //}]
             })
 
             .state('editJob', {
                 url: '/editJob/:id',
                 templateUrl: '/editJob.html',
-                controller: 'editJobCtrl',
-                onEnter: ['$state','auth',function($state,auth) {
-                    if(auth.isLoggedIn()) {
-                        $state.go('home');
-                    }
-                }]
+                controller: 'editJobCtrl'
+                //onEnter: ['$state','auth',function($state,auth) {
+                //    if(auth.isLoggedIn()) {
+                //        $state.go('home');
+                //    }
+                //}]
             })
             .state('addJob', {
                 url: '/addJob',
                 templateUrl: '/addJob.html',
-                controller: 'addJobCtrl',
-                onEnter: ['$state','auth',function($state,auth) {
-                    if(auth.isLoggedIn()) {
-                        $state.go('home');
-                    }
-                }]
+                controller: 'addJobCtrl'
+                //onEnter: ['$state','auth',function($state,auth) {
+                //    if(auth.isLoggedIn()) {
+                //        $state.go('home');
+                //    }
+                //}]
             });
 
 

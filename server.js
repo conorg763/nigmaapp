@@ -5,7 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
 var app = express();
+
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -36,6 +40,16 @@ app.use(passport.initialize());
 
 app.use('/', routes);
 app.use('/users', users);
+
+io.on('connection',function(socket) {
+  console.log('A user has connected');
+  socket.on('disconnect', function() {
+    console.log("A user has connected");
+
+
+  })
+
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

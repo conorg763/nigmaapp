@@ -4,7 +4,9 @@ app.controller('editJobCtrl',[
     'jobs',
     'auth',
     '$stateParams',
-    function($scope,jobs,auth,$stateParams) {
+    'toastr',
+    '$state',
+    function($scope,jobs,auth,$stateParams,toastr,$state) {
 
             var query = {_id: $stateParams.id};
             jobs.find(query)
@@ -17,7 +19,16 @@ app.controller('editJobCtrl',[
                 });
 
         $scope.updateJob = function(job) {
-            jobs.update(job);
+            jobs.update(job)
+            .then(function (job) {
+                    toastr.success('You have successfully updated this Job!','Woohooo!' );
+                    $state.go('career');
+            })
+
+                .catch(function (err) {
+                    console.log(err);
+                    toastr.error('Something seemed to have went wrong.. Please Try again.','Oops!' );
+                });
         }
     }
 ]);

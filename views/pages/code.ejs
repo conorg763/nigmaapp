@@ -1,5 +1,45 @@
 <div class="container">
-    <div class="jumbotron">
-        <h2>Coming in PHASE 2</h2>
+    <div class="jumbotron" ng-controller="CodeCtrl">
+        <h1>Code <small>Handy Tutorials, Resources and Links</small></h1>
+        <div ng-repeat="post in posts | orderBy:'-upvotes'">
+            <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)"></span>
+            {{post.upvotes}}
+            <span style="font-size:20px;">
+                <a ng-show="post.link" href="{{post.link}}">
+                    {{post.title}}
+                </a>
+                <span ng-hide="post.link">
+                    {{post.title}}
+                </span>
+                <span ng-show="post.author">
+                    posted by <a>{{post.author}}</a> |
+                </span>
+                <span>
+                    <a href="#/posts/{{post._id}}">Comments</a>
+                </span>
+            </span>
+        </div>
+
+        <form ng-submit="addPost()" ng-show = "isLoggedIn()" style="margin-top:30px;">
+            <h3>Add a New Tutorial</h3>
+
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control input-lg" placeholder="Tutorial" ng-model="title"></input>
+                <span class="ion-code-working form-control-feedback"></span>
+
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control input-lg" placeholder="Link" ng-model="link"></input>
+                <span class="ion-link form-control-feedback"></span>
+
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary">Add</button>
+        </form>
+        <div ng-hide="isLoggedIn()">
+            <p>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a>
+                before you can add a post.</p>
+            <a class="btn btn-lg btn-success" href="#/login"><i class="ion-log-in"></i> Log in </a>
+            <a class="btn btn-lg btn-primary" href="#/register"><i class="ion-person-add"></i> Create Account </a>
+        </div>
     </div>
 </div>
