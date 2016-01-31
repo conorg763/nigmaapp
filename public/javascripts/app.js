@@ -1,10 +1,11 @@
-var app = angular.module('nigma', ['ui.router','toastr','btford.socket-io']);
+var app = angular.module('nigma', ['ui.router', 'toastr', 'btford.socket-io']);
 
 app.config([
     '$stateProvider',
     '$urlRouterProvider',
 
-    function($stateProvider, $urlRouterProvider) {
+
+    function ($stateProvider, $urlRouterProvider) {
 
         $stateProvider
             .state('home', {
@@ -18,7 +19,7 @@ app.config([
                 templateUrl: '/posts.html',
                 controller: 'PostsCtrl',
                 resolve: {
-                    post: ['$stateParams', 'posts', function($stateParams, posts) {
+                    post: ['$stateParams', 'posts', function ($stateParams, posts) {
                         return posts.get($stateParams.id);
                     }]
                 }
@@ -28,8 +29,8 @@ app.config([
                 url: '/login',
                 templateUrl: '/login.html',
                 controller: 'AuthCtrl',
-                onEnter: ['$state', 'auth', function($state, auth){
-                    if(auth.isLoggedIn()){
+                onEnter: ['$state', 'auth', function ($state, auth) {
+                    if (auth.isLoggedIn()) {
                         $state.go('home');
                     }
                 }]
@@ -39,8 +40,8 @@ app.config([
                 url: '/register',
                 templateUrl: '/register.html',
                 controller: 'AuthCtrl',
-                onEnter: ['$state', 'auth', function($state, auth){
-                    if(auth.isLoggedIn()){
+                onEnter: ['$state', 'auth', function ($state, auth) {
+                    if (auth.isLoggedIn()) {
                         $state.go('home');
                     }
                 }]
@@ -50,8 +51,8 @@ app.config([
                 url: '/connect',
                 templateUrl: '/connect.html',
                 controller: 'ConnectCtrl',
-                onEnter: ['$state','auth',function($state,auth) {
-                    if(auth.logOut) {
+                onEnter: ['$state', 'auth', function ($state, auth) {
+                    if (auth.logOut) {
                         $state.go('home');
                     }
                 }]
@@ -67,7 +68,7 @@ app.config([
                 //    }
                 //}]
                 resolve: {
-                    postPromise: ['posts', function(posts){
+                    postPromise: ['posts', function (posts) {
                         return posts.getAll();
                     }]
                 }
@@ -87,7 +88,7 @@ app.config([
             .state('community', {
                 url: '/community',
                 templateUrl: '/community.html',
-                controller: 'CommunityCtrl'
+                controller: 'EventsCtrl'
                 //onEnter: ['$state','auth',function($state,auth) {
                 //    if(auth.isLoggedIn()) {
                 //        $state.go('home');
@@ -125,8 +126,39 @@ app.config([
                 //        $state.go('home');
                 //    }
                 //}]
-            });
+            })
 
+            .state('addEvent', {
+                url: '/addEvent',
+                templateUrl: '/addEvent.html',
+                controller: 'addEventCtrl'
+                //onEnter: ['$state','auth',function($state,auth) {
+                //    if(auth.isLoggedIn()) {
+                //        $state.go('home');
+                //    }
+                //}]
+            })
+            .state('editEvent', {
+                url: '/editEvent/:id',
+                templateUrl: '/editEvent.html',
+                controller: 'editEventCtrl'
+                //onEnter: ['$state','auth',function($state,auth) {
+                //    if(auth.isLoggedIn()) {
+                //        $state.go('home');
+                //    }
+                //}]
+            })
+
+            .state('viewEvent', {
+                url: '/viewEvent/:id',
+                templateUrl: '/viewEvent.html',
+                controller: 'viewEventCtrl'
+                //onEnter: ['$state','auth',function($state,auth) {
+                //    if(auth.isLoggedIn()) {
+                //        $state.go('home');
+                //    }
+                //}]
+            });
 
 
         $urlRouterProvider.otherwise('home');

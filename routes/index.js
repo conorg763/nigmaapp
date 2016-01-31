@@ -8,6 +8,7 @@ var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
 var User = mongoose.model('User');
 var Job = mongoose.model('Job');
+var Event = mongoose.model('Event');
 
 var auth = jwt({secret: 'SECRET',userProperty:'payload'}); //remember to change token to variable instead of hard coding
 
@@ -23,6 +24,40 @@ router.get('/posts', function(req, res, next) {
 
     res.json(posts);
   });
+});
+
+//get events for Community Page
+router.get('/events',function(req,res,next) {
+  Event.find(function (err,events) {
+    if(err){ return next(err); }
+    res.json(events);
+  })
+});
+
+router.post('/events',function(req,res,next) {
+  var event = new Event(req.body);
+  event.save(function(err,event) {
+    if(err) { return next(err); }
+    res.json(event);
+  })
+});
+
+router.post('/events/query',function(req,res,next) {
+  var query = req.body;
+  Event.find(query,function(err,events) {
+    if(err){ return next(err); }
+    res.json(events);
+  })
+});
+
+
+router.put('/editEvent/:id',function (req,res,next) {
+  var event =  req.body;
+  var id = req.params.id;
+  Event.findOneAndUpdate({_id: id},event,function(err,event) {
+    if(err) {return next(err);}
+    res.json(event);
+  })
 });
 
 //get jobs for Career Page
@@ -61,6 +96,13 @@ router.put('/editJob/:id',function (req,res,next) {
   })
 });
 
+router.delete('/editJob/:id', function(req,res,next) {
+  var id = req.params.id;
+  Job.remove({_id: id},function(err,job) {
+    if(err) {return next(err);}
+  })
+
+})
 //create new post
 router.post('/posts',auth, function(req, res, next) {
   var post = new Post(req.body);
@@ -140,13 +182,16 @@ router.put('/posts/:post/comments/:comment/upvote',auth,function(req,res,next) {
 
 //adding register route that creates username and password
 router.post('/register',function(req,res,next) {
-  if(!req.body.username || !req.body.password) {
+  if(!req.body.firstName || !req.body.surname || !req.body.email || !req.body.username || !req.body.password) {
     return res.status(400).json({message: 'Please fill out all fields'})
   }
 
   var user = new User();
+  user.firstName = req.body.firstName;
+  user.surname = req.body.surname;
+  user.email = req.body.email;
   user.username = req.body.username;
-  user.setPassword(req.body.password)
+  user.setPassword(req.body.password);
 
   user.save(function (err) {
     if(err){return next(err);}

@@ -1,3 +1,3 @@
-app.factory('Socket', ['$http','auth','socketFactory',function($http,auth,socketFactory) {
+app.factory('socket', ['socketFactory',function(socketFactory) {
 return socketFactory();
 }]);

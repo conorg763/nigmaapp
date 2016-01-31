@@ -1,0 +1,117 @@
+<div class="container">
+    <div class="jumbotron" ng-controller="editEventCtrl">
+        <form class="form-horizontal">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend><h2>Edit Event</h2></legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Title:</label>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control input-md" ng-model="event.title">
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Description</label>
+
+                    <div class="col-md-5">
+                        <textarea rows="8" class="form-control input-md" ng-model="event.description"></textarea>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Venue</label>
+
+                    <div class="col-md-2">
+                        <input type="text" class="form-control input-md" ng-model="event.venue">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Street Address</label>
+
+                    <div class="col-md-2">
+                        <input type="text" class="form-control input-md" ng-model="event.address">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Town/City</label>
+
+                    <div class="col-md-2">
+                        <input type="text" class="form-control input-md" ng-model="event.town">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">County</label>
+
+                    <div class="col-md-2">
+                        <input type="text" class="form-control input-md" ng-model="event.county">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Postcode</label>
+
+                    <div class="col-md-2">
+                        <input type="text" class="form-control input-md" ng-model="event.postcode">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Starts At</label>
+
+                    <div class="col-md-2">
+                        <input type="text" class="form-control input-md" ng-model="event.startsAt">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Ends At</label>
+
+                    <div class="col-md-2">
+                        <input type="text" class="form-control input-md" ng-model="event.endsAt">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Website</label>
+
+                    <div class="col-md-2">
+                        <input type="text" class="form-control input-md" ng-model="event.website">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Email</label>
+
+                    <div class="col-md-2">
+                        <input type="text" class="form-control input-md" ng-model="event.email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Telephone</label>
+
+                    <div class="col-md-2">
+                        <input type="text" class="form-control input-md" ng-model="event.phone">
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-lg" ng-click="updateEvent(event)">Update</button>
+                <button class="btn btn-danger" ng-click="removeEvent(event)">Remove</button>
+            </fieldset>
+        </form>
+
+    </div>
+
+</div>

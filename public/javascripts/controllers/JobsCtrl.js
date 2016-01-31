@@ -1,4 +1,4 @@
-app.factory('jobs', ['$http','auth',function($http,auth){
+app.factory('jobs', ['$http','auth','$state',function($http,auth,$state){
     var jobs = {
         jobs: []
     };
@@ -28,6 +28,11 @@ app.factory('jobs', ['$http','auth',function($http,auth){
         return $http.put('/editJob/' + job._id,job).then(function(res) {
             return true;
         })
+    };
+
+    jobs.remove = function(job) {
+        return $http.delete('/editJob/' + job._id,job)
+
     };
 
 

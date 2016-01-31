@@ -1,5 +1,39 @@
 <div class="container">
-    <div class="jumbotron" ng-controller="CommunityCtrl">
-        <h2>Coming in PHASE 2</h2>
+    <div class="jumbotron" ng-controller="EventsCtrl">
+            <div class="panel" ng-repeat="event in events">
+                <div class="panel-heading">
+                    <div class="text-center">
+                            <div class="col-sm-9">
+                                <h3 class="pull-left">{{event.title}}</h3>
+                            </div>
+                            <div class="col-sm-3">
+                                <h4 class="pull-right">
+                                    <small><em>2014-07-30<br>18:30:00</em></small>
+                                </h4>
+                            </div>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div class="col-sm-9">
+                    {{event.description}}
+                    </div>
+                </div>
+
+                <div class="panel-footer">
+                    <span class="label label-default">Welcome</span> <span class="label label-default">Updates</span>
+                    <span class="label label-default">July</span>
+                    <span class="pull-right"><button class="label btn-success" ui-sref="viewEvent({id: event._id})">View</button></span>
+                </div>
+            </div>
+
+        <div class="text-center">
+            <a class="btn btn-md btn-success" ui-sref="addEvent"><i class="ion-log-in"></i> Add Event </a>
+
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+
     </div>
 </div>
