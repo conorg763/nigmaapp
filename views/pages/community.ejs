@@ -18,17 +18,25 @@
                     <div class="col-sm-9">
                     {{event.description}}
                     </div>
+                    <span class="pull-right"><button class="btn btn-primary btn-md" ui-sref="viewEvent({id: event._id})">
+                            <i class="ion-search"></i> View</button></span>
+
                 </div>
 
                 <div class="panel-footer">
                     <span class="label label-default">Welcome</span> <span class="label label-default">Updates</span>
                     <span class="label label-default">July</span>
-                    <span class="pull-right"><button class="label btn-success" ui-sref="viewEvent({id: event._id})">View</button></span>
                 </div>
             </div>
 
         <div class="text-center">
-            <a class="btn btn-md btn-success" ui-sref="addEvent"><i class="ion-log-in"></i> Add Event </a>
+            <a class="btn btn-lg btn-success" ng-show="isLoggedIn()" ui-sref="addEvent"><i class="ion-plus-circled"></i> Add Event </a>
+            <div ng-hide="isLoggedIn()">
+                <p>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a>
+                    before you can add an Event.</p>
+                <a class="btn btn-lg btn-success" href="#/login"><i class="ion-log-in"></i> Log in </a>
+                <a class="btn btn-lg btn-primary" href="#/register"><i class="ion-person-add"></i> Create Account </a>
+            </div>
 
         </div>
     </div>

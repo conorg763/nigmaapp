@@ -31,7 +31,9 @@ app.factory('events', ['$http','auth','$state',function($http,auth,$state){
     };
 
     events.remove = function(event) {
-        return $http.delete('/editEvent/' + event._id,event)
+        return $http.delete('/editEvent/' + event._id,event).then(function (res) {
+            return true;
+        })
 
     };
 
@@ -46,6 +48,8 @@ app.controller('EventsCtrl',[
     function($scope,events,auth) {
         events.getAll()
             .then(function(eventData) {
+                $scope.isLoggedIn = auth.isLoggedIn;   //check
+
                 $scope.events = eventData.data;
             });
 

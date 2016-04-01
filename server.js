@@ -9,13 +9,17 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 
+var request = require('request');
+var Twitter = require('twitter');
 
 mongoose.connect('mongodb://localhost:27017/news');
 
 require('./models/Posts');
 require('./models/Comments');
+require('./models/Categories');
 require('./models/Users');
 require('./models/Jobs');
+require('./models/Projects');
 require('./models/Events');
 require('./config/passport');
 
@@ -36,7 +40,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passport.initialize());
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers','Content-Type');
+  next();
+});
 app.use('/', routes);
+
 app.use('/users', users);
 
 // catch 404 and forward to error handler
@@ -64,6 +75,7 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
+
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,

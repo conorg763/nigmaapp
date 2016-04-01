@@ -1,15 +1,15 @@
 <div class="container">
     <div class="jumbotron">
-            <h3>
-                <a ng-show="post.link" href="{{post.link}}">
-                    {{post.title}}
-                </a>
-              <span ng-hide="post.link">
-                {{post.title}}
+        <h3>
+            <a  href="{{category.post}}">
+                {{category.post}}
+            </a>
+              <span ng-hide="category.post">
+                {{category.post}}
               </span>
-            </h3>
+        </h3>
 
-
+<!--
         <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
             <span class="glyphicon glyphicon-thumbs-up"
                   ng-click="incrementUpvotes(comment)"></span>
@@ -17,7 +17,7 @@
             <span style="font-size:20px; margin-left:10px;">
               {{comment.body}}
             </span>
-        </div>
+        </div>-
 
         <form ng-submit="addComment()" ng-show="isLoggedIn()" style="margin-top:30px;">
             <h3>Add a New Comment</h3>
@@ -27,7 +27,7 @@
             </div>
             <a type="submit" class="btn btn-success btn-md"><i class="ion-plus-circled"></i> Post Comment</a>
             <a class="btn btn-primary btn-md" href="#/code"><i class="ion-android-home"></i> Return to Code</a>
-        </form>
+        </form>-->
         <div ng-hide="isLoggedIn()">
             <h3>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can comment.</h3>
         </div>

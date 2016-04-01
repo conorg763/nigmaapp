@@ -1,6 +1,6 @@
 <div class="container">
     <div class="jumbotron" ng-controller="JobsCtrl">
-        <h2>Add Job:</h2>
+        <h1>Career <small>Intern,Placement and Graduate Roles</small></h1>
         <table class="table">
             <thead>
             <tr>
@@ -8,7 +8,6 @@
                 <th>Company:</th>
                 <th>Location:</th>
                 <th>Job Type:</th>
-                <th>Job Description:</th>
                 <th>Salary</th>
                 <th>Apply via:</th>
                 <th>Action</th>
@@ -22,17 +21,20 @@
                 <td>{{job.company}}</td>
                 <td>{{job.location}}</td>
                 <td>{{job.jobType}}</td>
-                <td>{{job.jobDescription}}</td>
                 <td>{{job.salary}}</td>
                 <td>{{job.apply}}</td>
-                <td><button class="btn btn-success" ui-sref="viewJob({id: job._id})">View</button></td>
+                <td><button class="btn btn-primary" ui-sref="viewJob({id: job._id})"><i class="ion-search"></i> View</button></td>
             </tr>
             </tbody>
         </table>
-        <a class="btn btn-lg btn-success" ui-sref="addJob"><i class="ion-log-in"></i> Add Job </a>
 
-        <p>Job List</p>
-        <input ng-model="test">
-        {{test}}
+        <a class="btn btn-lg btn-success" ng-show="isLoggedIn()" ui-sref="addJob"><i class="ion-plus-circled"></i> Add Job </a>
+        <div ng-hide="isLoggedIn()">
+            <p>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a>
+                before you can add a Job.</p>
+            <a class="btn btn-lg btn-success" href="#/login"><i class="ion-log-in"></i> Log in </a>
+            <a class="btn btn-lg btn-primary" href="#/register"><i class="ion-person-add"></i> Create Account </a>
+        </div>
+
     </div>
 </div>

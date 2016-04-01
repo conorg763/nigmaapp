@@ -1,27 +1,54 @@
 <title>Nigma </title>
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
 <!-- Angular toast - -->
 <link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css" />
+
+<link rel="stylesheet" href="../stylesheets/style.css" type="text/css">  <!-- Custom CSS -->
+
 <!-- socket io -->
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 
 <!-- Angular and Dependencies -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular.min.js"></script>
+<!-- Toaster Modals -->
 <script src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<!-- Angular Google Maps API dependencies
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-maps/2.3.2/angular-google-maps.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.6.1/lodash.js"></script>
+<script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+-->
+
+
 <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
 <script src="/libs/angular-socket-io/socket.js"></script>
 <script src="/javascripts/app.js"></script>
+<script src="/javascripts/socket.js"></script>
+<script src="/javascripts/bootbox.js"></script>
+<script src="/javascripts/twitter.js"></script>
+
+
+
+
 
 
 
 <!-- Controllers -->
+<script src="/javascripts/controllers/CategoriesCtrl.js"></script>
 <script src="/javascripts/controllers/PostsCtrl.js"></script>
 <script src="/javascripts/controllers/JobsCtrl.js"></script>
 <script src="/javascripts/controllers/viewJobCtrl.js"></script>
 <script src="/javascripts/controllers/editJobCtrl.js"></script>
 <script src="/javascripts/controllers/addJobCtrl.js"></script>
+<script src="/javascripts/controllers/ProjectsCtrl.js"></script>
+<script src="/javascripts/controllers/viewProjectCtrl.js"></script>
+<script src="/javascripts/controllers/editProjectCtrl.js"></script>
+<script src="/javascripts/controllers/addProjectCtrl.js"></script>
 <script src="/javascripts/controllers/EventsCtrl.js"></script>
 <script src="/javascripts/controllers/addEventCtrl.js"></script>
 <script src="/javascripts/controllers/editEventCtrl.js"></script>
@@ -31,12 +58,13 @@
 <script src="/javascripts/controllers/ConnectCtrl.js"></script>
 <script src="/javascripts/controllers/CodeCtrl.js"></script>
 <script src="/javascripts/controllers/CommunityCtrl.js"></script>
-
+<script src="/javascripts/controllers/editProfileCtrl.js"></script>
 <script src="/javascripts/controllers/MainCtrl.js"></script>
+<script src="/javascripts/controllers/SocketFactory.js"></script>
 
 
 
-<link rel="stylesheet" href="../stylesheets/style.css" type="text/css">  <!-- Custom CSS -->
+
 
 
 <style> .glyphicon-thumbs-up {

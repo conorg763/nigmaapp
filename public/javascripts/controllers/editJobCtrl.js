@@ -31,16 +31,23 @@ app.controller('editJobCtrl',[
         };
 
         $scope.removeJob = function(job) {
-            jobs.remove(job)
-                .then (function () {
-                $state.go('home');
-                toastr.success('You have successfully removed this Job!','Woohooo!');
+            bootbox.confirm("Are you sure you want to delete this job?",function(answer) {
+                if(answer == true) {
+                    jobs.remove(job)
+                        .then(function (job) {
+                            toastr.success('You have successfully removed this Job!','Woohooo!');
+                            $state.go('career');
 
+                        })
+                        .catch(function (err) {
+                            console.log(err);
+                            toastr.error('Something seemed to have went wrong.. Please Try again.','Oops!' );
+                        })
+
+                }
             })
-                .catch(function (err) {
-                    console.log(err);
-                    toastr.error('Something seemed to have went wrong.. Please Try again.','Oops!' );
-                })
+
+
         };
     }
 ]);

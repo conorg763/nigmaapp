@@ -1,28 +1,28 @@
 
-app.controller('editEventCtrl',[
+app.controller('editProjectCtrl',[
     '$scope',
-    'events',
+    'projects',
     'auth',
     '$stateParams',
     'toastr',
     '$state',
-    function($scope,events,auth,$stateParams,toastr,$state) {
+    function($scope,projects,auth,$stateParams,toastr,$state) {
 
         var query = {_id: $stateParams.id};
-        events.find(query)
-            .then(function (event) {
-                $scope.event = event;
+        projects.find(query)
+            .then(function (project) {
+                $scope.project = project;
             })
 
             .catch(function (err) {
                 console.log(err);
             });
 
-        $scope.updateEvent = function(event) {
-            events.update(event)
-                .then(function (event) {
-                    toastr.success('You have successfully updated this Event!','Woohooo!' );
-                    $state.go('community');
+        $scope.updateProject = function(project) {
+            projects.update(project)
+                .then(function (project) {
+                    toastr.success('You have successfully updated this Project!','Woohooo!' );
+                    $state.go('projects');
                 })
                 .catch(function (err) {
                     console.log(err);
@@ -30,13 +30,14 @@ app.controller('editEventCtrl',[
                 });
         };
 
-        $scope.removeEvent = function(event) {
-            bootbox.confirm("Are you sure you want to delete this Event?",function(answer) {
+        $scope.removeProject = function(project) {
+            bootbox.confirm("Are you sure you want to delete this Project?",function(answer) {
                 if (answer == true) {
-                    events.remove(event)
+                    projects.remove(project)
                         .then(function () {
-                            toastr.success('You have successfully removed this Event!', 'Woohooo!');
-                            $state.go('community');
+                            toastr.success('You have successfully removed this Project!', 'Woohooo!');
+                            $state.go('projects');
+
 
                         })
                         .catch(function (err) {
@@ -45,6 +46,7 @@ app.controller('editEventCtrl',[
                         })
                 }
             })
+
         };
     }
 ]);

@@ -14,6 +14,18 @@ app.config([
                 controller: 'MainCtrl'
             })
 
+            .state('categories', {
+                url: '/categories/:id',
+                templateUrl: '/categories.html',
+                controller: 'CategoriesCtrl',
+                resolve: {
+                    category: ['$stateParams', 'categories', function ($stateParams, categories) {
+                        return categories.get($stateParams.id);
+                    }]
+                }
+            })
+
+
             .state('posts', {
                 url: '/posts/:id',
                 templateUrl: '/posts.html',
@@ -51,11 +63,11 @@ app.config([
                 url: '/connect',
                 templateUrl: '/connect.html',
                 controller: 'ConnectCtrl',
-                onEnter: ['$state', 'auth', function ($state, auth) {
-                    if (auth.logOut) {
-                        $state.go('home');
-                    }
-                }]
+                //onEnter: ['$state', 'auth', function ($state, auth) {
+                //    if (auth.logOut) {
+                //        $state.go('home');
+                //    }
+                //}]
             })
 
             .state('code', {
@@ -89,6 +101,17 @@ app.config([
                 url: '/community',
                 templateUrl: '/community.html',
                 controller: 'EventsCtrl'
+                //onEnter: ['$state','auth',function($state,auth) {
+                //    if(auth.isLoggedIn()) {
+                //        $state.go('home');
+                //    }
+                //}]
+            })
+
+            .state('projects', {
+                url: '/projects',
+                templateUrl: '/projects.html',
+                controller: 'ProjectsCtrl'
                 //onEnter: ['$state','auth',function($state,auth) {
                 //    if(auth.isLoggedIn()) {
                 //        $state.go('home');
@@ -158,7 +181,49 @@ app.config([
                 //        $state.go('home');
                 //    }
                 //}]
-            });
+            })
+
+            .state('viewProject', {
+                url: '/viewProject/:id',
+                templateUrl: '/viewProject.html',
+                controller: 'viewProjectCtrl'
+                //onEnter: ['$state','auth',function($state,auth) {
+                //    if(auth.isLoggedIn()) {
+                //        $state.go('home');
+                //    }
+                //}]
+            })
+
+            .state('editProject', {
+                url: '/editProject/:id',
+                templateUrl: '/editProject.html',
+                controller: 'editProjectCtrl'
+                //onEnter: ['$state','auth',function($state,auth) {
+                //    if(auth.isLoggedIn()) {
+                //        $state.go('home');
+                //    }
+                //}]
+            })
+            .state('addProject', {
+                url: '/addProject',
+                templateUrl: '/addProject.html',
+                controller: 'addProjectCtrl'
+                //onEnter: ['$state','auth',function($state,auth) {
+                //    if(auth.isLoggedIn()) {
+                //        $state.go('home');
+                //    }
+                //}]
+            })
+            .state('editProfile', {
+                url: '/editProfile',
+                templateUrl: '/editProfile.html',
+                controller: 'editProfileCtrl'
+                //onEnter: ['$state','auth',function($state,auth) {
+                //    if(auth.isLoggedIn()) {
+                //        $state.go('home');
+                //    }
+                //}]
+            })
 
 
         $urlRouterProvider.otherwise('home');

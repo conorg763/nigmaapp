@@ -1,7 +1,35 @@
 <div class="container">
     <div class="jumbotron">
+        <div ng-repeat="event in events">
+
+            <h2>Next Nigma Event:  </h2>
+            <p><strong>Title:   </strong> {{event.name}} </p>
+            <p><strong>Address:</strong> {{event.venue.name}}, {{event.venue.address_1}} , {{event.venue.city}}</p>
+            <p><strong>Date:</strong> {{event.time | date: 'dd/MM/yyyy'}} </p>
+            <p><strong>Time:</strong> {{event.time | date: 'HH:mm a'}} </p>
+            <p><strong>RSVP:</strong> We have {{event.yes_rsvp_count}} {{event.group.who}} with
+                {{event.waitlist_count}} on the waiting list. </p>
+
+            <iframe width="600" height="450" frameborder="0" style="border:0"
+                    ng-src="{{trustSrc(event.venue.city)}}" allowfullscreen></iframe>
 
 
+        </div>
+        </div>
+    <div class="jumbotron">
+        <h1>Home <small>Use #nigma to see your tweet appear</small> </h1>
+            <h2>No. of RSVPS: {{rsvps}}</h2>
 
+        <p>{{status}}</p>
+            <div  ng-repeat="tweet in tweets | orderBy:'-created_at' ">
+                <div class="row">
+                    <div class="span pull-left no-space"><img class="" ng-src="{{tweet.user.profile_image_url}}" /></div>
+                    <strong>{{tweet.user.name}}: </strong>
+                <p>{{tweet.text}}</p>
+                <p>{{tweet.entities[4]}}</p>
+
+
+                </div>
+            </div>
     </div>
 </div>

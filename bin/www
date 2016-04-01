@@ -5,6 +5,8 @@
  */
 
 var app = require('../server');
+var request = require('request');
+var twitter = require('twitter');
 var debug = require('debug')('tutorials:server');
 var http = require('http');
 
@@ -19,12 +21,47 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server = http.Server(app);
 var io = require('socket.io')(server);
+var users = [];
 
-io.on('connection', function(socket) {
-  console.log('A user has connected');
+io.on('connection',function(socket) {
+  var username = '';
+  console.log("A user has connected");
+
+  socket.on('request-users',function() {
+    socket.emit('users',{users: users});
+  });
+
+  socket.on('message',function(data) {
+    io.emit('message',{username:username, message: data.message});
+  });
+
+  socket.on('add-user',function(data) {
+
+    if(users.indexOf(data.username) == -1) {
+      io.emit('add-user', {
+        username: data.username
+      });
+
+      username = data.username;
+      users.push(data.username);
+    }
+
+    else {
+      socket.emit('prompt-username', {
+        message: 'User Already Exists'
+      })
+    }
+  });
+
+  socket.on('disconnect',function() {
+    console.log(username + " has disconnected");
+    users.splice(users.indexOf(username),1);
+    io.emit('remove-user',{username: username});
+  })
 });
+
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -33,6 +70,48 @@ io.on('connection', function(socket) {
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+var client = new twitter({
+  consumer_key: '5D4vVnQd2XkghydvNFnj3uuaK',
+  consumer_secret: 'EI2OIeD5lzUFaIfpoPXLHeQ7KhAUcuas6cklUvUTk9ZRhE8p6e',
+  access_token_key: '3404042547-Qagc829o0rJlkgmvXR4KBXZSvb68kBsd7dVORjW',
+  access_token_secret: 'KLFd5zKtml8BoesUpTYZBiNJMPnl72YiRgsgAQP9iitXI'
+});
+
+client.stream('statuses/filter',{track:'#brussels',language: 'en'}, function(stream) {
+  stream.on('data',function(tweet) {
+    io.emit('newTweet', tweet);
+  });
+  stream.on('error',function(error) {
+    throw error;
+  });
+
+  stream.on('destroy', function (response) {
+    // Handle a 'silent' disconnection from Twitter, no end/error event fired
+    socket.emit('twitter-done');
+  });
+
+});
+
+
+//mup.stream("/2/rsvps", function(stream){
+//  stream.on("data", function(rsvp){
+//        io.emit('newRsvp',rsvp);
+//      });
+//  stream.on("error", function(error) {
+//        throw error;
+//      });
+//});
+
+
+
+
+io.on('connection', function(socket) {
+  console.log('a user has connected at home ');
+  socket.on('disconnect', function() {
+    console.log('user has disconnected at home');
+  });
+});
 
 /**
  * Normalize a port into a number, string, or false.
@@ -82,6 +161,7 @@ function onError(error) {
   }
 }
 
+
 /**
  * Event listener for HTTP server "listening" event.
  */
@@ -93,3 +173,5 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+

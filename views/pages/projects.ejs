@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="jumbotron" ng-controller="ProjectsCtrl">
+        <div class="panel" ng-repeat="project in projects">
+            <div class="panel-heading">
+                <div class="text-center">
+                    <div class="col-sm-9">
+                        <h3 class="pull-left">{{project.title}}</h3>
+                    </div>
+                    <div class="col-sm-3">
+                        <h4 class="pull-right">
+                            <small><em>2014-07-30<br>18:30:00</em></small>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <div class="col-sm-9">
+                    {{project.description}}
+                </div>
+                <span class="pull-right"><button class="btn btn-primary btn-md" ui-sref="viewProject({id: project._id})">
+                        <i class="ion-search"></i> View</button></span>
+            </div>
+
+            <div class="panel-footer">
+                <span class="label label-default">Welcome</span> <span class="label label-default">Updates</span>
+                <span class="label label-default">July</span>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a class="btn btn-lg btn-success" ng-show="isLoggedIn()" ui-sref="addProject"><i class="ion-plus-circled"></i> Add Project </a>
+
+            <div ng-hide="isLoggedIn()">
+                <p>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a>
+                    before you can add a Project.</p>
+                <a class="btn btn-lg btn-success" href="#/login"><i class="ion-log-in"></i> Log in </a>
+                <a class="btn btn-lg btn-primary" href="#/register"><i class="ion-person-add"></i> Create Account </a>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+
+    </div>
+</div>

@@ -31,7 +31,9 @@ app.factory('jobs', ['$http','auth','$state',function($http,auth,$state){
     };
 
     jobs.remove = function(job) {
-        return $http.delete('/editJob/' + job._id,job)
+        return $http.delete('/editJob/' + job._id,job).then(function (res) {
+            return true;
+        })
 
     };
 
@@ -46,6 +48,7 @@ app.controller('JobsCtrl',[
     function($scope,jobs,auth) {
         jobs.getAll()
             .then(function(jobData) {
+                $scope.isLoggedIn = auth.isLoggedIn;   //check
                 $scope.jobs = jobData.data;
             });
 
