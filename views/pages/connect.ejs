@@ -1,17 +1,20 @@
+
 <div class="container">
     <div class="jumbotron">
         <div class="row">
             <div class="col-xs-8 chat-window">
                 <ul>
                 <li ng-repeat="message in messages">
-                    <span class="username">{{message.username}}</span>
-                    <span class="message">{{message.message}}</span>
+                   <p> <span class="username"><strong>{{message.username}}</strong></span>
+                    <span class="message">{{message.message}}</span></p>
                 </li>
                 </ul>
             </div>
             <div class="col-xs-4 user-window">
+                <h3>Users in this Chat Room:</h3>
+
                 <ul>
-                    <li ng-repeat="user in users">{{user}}</li>
+                    <li ng-repeat="user in users"><p>{{user}}</p></li>
                 </ul>
 
             </div>

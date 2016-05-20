@@ -4,14 +4,18 @@ app.factory('categories', ['$http','auth','$state',function($http,auth,$state){
     };
 
     categories.getAll = function() {
-        return $http.get('/categories').then(function(data) {
-            angular.copy(data,categories.categories);
+        return $http.get('/categories').success(function(res) {
+            return res.data;
         })
     }
-
+    categories.category = function(post) {
+        return $http.get('/code/' + post.categories,post).then(function(res) {
+            return res.data;
+        })
+    };
     categories.get = function(id) {
         //use the express route to grab post and return res
-        return $http.get('/categories/' + id).then(function(res) {
+        return $http.get('/code/' + id).then(function(res) {
             return res.data;
         })
     }
@@ -22,13 +26,14 @@ app.factory('categories', ['$http','auth','$state',function($http,auth,$state){
     app.controller('CategoriesCtrl',[
         '$scope',
         'categories',
+        'category',
         'auth',
-        function($scope,categories,auth) {
-            categories.getAll()
-                .then(function(categoryData) {
-                    $scope.isLoggedIn = auth.isLoggedIn;   //check
-                    $scope.categories = categoryData.data;
-                });
+        function($scope,categories,category,auth) {
+            categories.getAll().then(function(categoryData) {
+                $scope.categories = categoryData.data;
+                $scope.isLoggedIn = auth.isLoggedIn;
+            })
+
 
         }
     ]);

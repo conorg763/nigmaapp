@@ -15,16 +15,10 @@ app.config([
             })
 
             .state('categories', {
-                url: '/categories/:id',
-                templateUrl: '/categories.html',
-                controller: 'CategoriesCtrl',
-                resolve: {
-                    category: ['$stateParams', 'categories', function ($stateParams, categories) {
-                        return categories.get($stateParams.id);
-                    }]
-                }
+                url: '/code/:category',
+                templateUrl: '/category.html',
+                controller: 'CategoriesCtrl'
             })
-
 
             .state('posts', {
                 url: '/posts/:id',

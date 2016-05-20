@@ -6,5 +6,4 @@ var CategorySchema = new mongoose.Schema({
 
 });
 
-
 mongoose.model('Category',CategorySchema);

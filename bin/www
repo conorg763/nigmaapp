@@ -20,6 +20,7 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
+    //User defines the Socket module
 
 var server = http.Server(app);
 var io = require('socket.io')(server);
@@ -78,7 +79,7 @@ var client = new twitter({
   access_token_secret: 'KLFd5zKtml8BoesUpTYZBiNJMPnl72YiRgsgAQP9iitXI'
 });
 
-client.stream('statuses/filter',{track:'#brussels',language: 'en'}, function(stream) {
+client.stream('statuses/filter',{track:'RT to enter',language: 'en'}, function(stream) {
   stream.on('data',function(tweet) {
     io.emit('newTweet', tweet);
   });
@@ -92,19 +93,6 @@ client.stream('statuses/filter',{track:'#brussels',language: 'en'}, function(str
   });
 
 });
-
-
-//mup.stream("/2/rsvps", function(stream){
-//  stream.on("data", function(rsvp){
-//        io.emit('newRsvp',rsvp);
-//      });
-//  stream.on("error", function(error) {
-//        throw error;
-//      });
-//});
-
-
-
 
 io.on('connection', function(socket) {
   console.log('a user has connected at home ');

@@ -25,7 +25,6 @@ app.controller('editEventCtrl',[
                     $state.go('community');
                 })
                 .catch(function (err) {
-                    console.log(err);
                     toastr.error('Something seemed to have went wrong.. Please Try again.','Oops!' );
                 });
         };

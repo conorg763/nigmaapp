@@ -2,11 +2,9 @@
     <div class="jumbotron">
         <h3>
             <a  href="{{category.post}}">
-                {{category.post}}
+                {{category.categoryName}}
             </a>
-              <span ng-hide="category.post">
-                {{category.post}}
-              </span>
+
         </h3>
 
 <!--
@@ -29,7 +27,7 @@
             <a class="btn btn-primary btn-md" href="#/code"><i class="ion-android-home"></i> Return to Code</a>
         </form>-->
         <div ng-hide="isLoggedIn()">
-            <h3>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can comment.</h3>
+            <h3>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before yo can comment.</h3>
         </div>
     </div>
 </div>

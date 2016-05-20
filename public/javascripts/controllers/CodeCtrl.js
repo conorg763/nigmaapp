@@ -15,10 +15,12 @@ app.controller('CodeCtrl',[
             posts.create({
                 title: $scope.title,
                 link: $scope.link,
+                categories: $scope.categories
             });
             //clears values
             $scope.title = '';
             $scope.link = '';
+            $scope.categories=[];
         };
         //post factory has an upvote() function in it, we are just calling using this post
         $scope.incrementUpvotes = function (post) {

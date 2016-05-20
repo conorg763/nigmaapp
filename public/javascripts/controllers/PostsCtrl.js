@@ -3,6 +3,15 @@ app.factory('posts', ['$http','auth',function($http,auth){
         posts: []
     };
 
+    o.get = function(id) {
+        //use the express route to grab post and return res
+        return $http.get('/posts/' + id).then(function(res) {
+            return res.data;
+        })
+    };
+
+
+
     o.getAll = function() {
         return $http.get('/posts').success(function(data) {
             angular.copy(data, o.posts);
@@ -28,13 +37,12 @@ app.factory('posts', ['$http','auth',function($http,auth){
         });
     };
 
-    // this grabs a single post from the server
     o.get = function(id) {
         //use the express route to grab post and return res
         return $http.get('/posts/' + id).then(function(res) {
             return res.data;
         })
-    }
+    };
     //comments grabbed
     o.addComment = function(id, comment) {
         return $http.post('/posts/' + id + '/comments', comment, {
@@ -57,9 +65,9 @@ app.controller('PostsCtrl', [
     'post',
     'auth',
     function($scope, posts, post,auth){
-        $scope.post = post;
-        $scope.isLoggedIn = auth.isLoggedIn;   //check
 
+        $scope.isLoggedIn = auth.isLoggedIn;   //check
+        $scope.post = post;
         $scope.addComment = function(){
             if($scope.body === '') { return; }
             posts.addComment(post._id,{
@@ -76,3 +84,5 @@ app.controller('PostsCtrl', [
 
     }
 ]);
+
+

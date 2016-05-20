@@ -5,33 +5,29 @@
             <fieldset>
 
                 <!-- Form Name -->
-                <legend><h2>Edit Profile:</h2></legend>
+                <legend><h2>Reset Password:</h2></legend>
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label">First Name:</label>
+                    <label class="col-md-4 control-label">Current password:</label>
                     <div class="col-md-5">
-                        <input type="text" class="form-control input-md" ng-model="profile.firstName">
+                        <input type="password" class="form-control input-md" ng-model="profile.firstName">
                     </div>
                 </div>
-
-                <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label">Surname:</label>
+                    <label class="col-md-4 control-label">New password:</label>
                     <div class="col-md-5">
-                        <input type="text" class="form-control input-md" ng-model="profile.surname">
+                        <input type="password" class="form-control input-md" ng-model="profile.firstName">
                     </div>
                 </div>
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label">Email:</label>
-                    <div class="col-md-2">
-                        <input type="text" class="form-control input-md" ng-model="profile.email">
-
+                    <label class="col-md-4 control-label">Confirm password:</label>
+                    <div class="col-md-5">
+                        <input type="password" class="form-control input-md" ng-model="profile.firstName">
                     </div>
                 </div>
-
 
                 <button class="btn btn-primary btn-lg" ng-click="updateProfile(profile)">Update</button>
 

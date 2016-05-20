@@ -30,7 +30,6 @@ app.controller('MainCtrl', [
         var googleKey = 'AIzaSyD-lu9UvVjk-OpVg6p12aEWixXX4HcWIYs';
         var groupName = 'nigmaio';
         var url = 'http://api.meetup.com/2/events.json?key=' + meetupKey + '&group_urlname='+ groupName + "&callback=JSON_CALLBACK";
-       // var googleMap = "https://www.google.com/maps/embed/v1/place?q=" + postcode + "&key=" + googleKey;
 
         Socket.on('newTweet',function(tweet) {
 
@@ -48,13 +47,23 @@ app.controller('MainCtrl', [
              .then(function(data) {
                 console.log("success");
                 $scope.events = data.data.results;
+
                  console.log($scope.events);
-                 angular.forEach($scope.events,function(event) {
-                     console.log(event.venue.city);
-                     $scope.postcode = event.venue.city;
+                 if($scope.events.length > 0) {
+                     angular.forEach($scope.events,function(event) {
+                         $scope.postcode = event.venue.city;
 
-                 })
-
+                     })
+                     $scope.isMeetupAvailable = function() {
+                         return true;
+                     };
+                 }
+                 else {
+                     $scope.isMeetupAvailable = function() {
+                         $scope.noUpcomingEvents = "No Upcoming Events Right Now, but we will keep you posted!";
+                         return false;
+                     };
+                 }
              })
             .catch(function(status) {
                 console.log(status);

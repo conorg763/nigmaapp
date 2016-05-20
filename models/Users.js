@@ -6,11 +6,11 @@ var UserSchema = new mongoose.Schema({
     surname: String,
     email: String,
     id: String,
-    token: String,
+    token: String, //token provided to make use of passport module
     name: String,
     username: {type: String, lowercase: true,unique:true},
-    hash: String,
-    salt: String
+    hash: String,  //Hashes the password
+    salt: String //Randomises hash by adding a random string
 });
 
 UserSchema.methods.generateJWT = function() {

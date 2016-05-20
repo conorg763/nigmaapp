@@ -24,19 +24,10 @@ router.get('/',function(req,res) {
   res.render('index');
 });
 
-//get Categories for Code Page
-router.get('/categories',function(req,res,next) {
-  Category.find(function(err,categories) {
-    if(err) { return next(err);}
-    res.json(categories);
-  })
-
-});
 //get posts for Code Page
 router.get('/posts', function(req, res, next) {
   Post.find(function(err, posts){
     if(err){ return next(err); }
-
     res.json(posts);
   });
 });
@@ -66,6 +57,13 @@ router.post('/projects/query',function(req,res,next) {
   })
 });
 
+router.get('/code/:category',function (req,res,next) {
+  var category = req.params.category;
+  Post.find({categories: category},function(err, posts){
+    if(err){ return next(err); }
+    res.json(posts);
+  });
+});
 
 router.put('/editProject/:id',function (req,res,next) {
   var project =  req.body;
@@ -203,6 +201,7 @@ router.param('comment', function(req, res, next, id) {
 });
 
 router.get('/categories/:category',function(req,res) {
+
   req.category.populate('posts', function(err,category) {
     if (err) {return next(err);}
 

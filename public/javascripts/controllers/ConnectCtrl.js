@@ -10,11 +10,11 @@ app.controller('ConnectCtrl',[
 
         var promptUsername = function(message) {
             bootbox.prompt(message, function(name) {
-                if(name != null) {
+                if(name != "") {
                     Socket.emit('add-user',{username: name})
                 }
                 else {
-                    promptUsername('You must enter a username!');
+                    promptUsername('Please enter a nickname!');
                 }
             })
         };
@@ -25,7 +25,7 @@ app.controller('ConnectCtrl',[
             $scope.msg = '';
         };
 
-        promptUsername("What is your name?");
+        promptUsername("Please enter a nickname?");
 
         Socket.emit('request-users',{});
 
