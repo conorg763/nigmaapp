@@ -31,6 +31,13 @@ app.config([
                 }
             })
 
+            .state('nigma', {
+                url: '/nigma',
+                templateUrl: '/nigma.html',
+                controller: 'NigmaCtrl'
+
+            })
+
             .state('login', {
                 url: '/login',
                 templateUrl: '/login.html',

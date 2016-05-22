@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="jumbotron">
+        <h1>Real-Time Twitter Feed
+            <small>Use #nigma to see your tweet appear</small>
+        </h1>
+        <h2>No. of RSVPS: {{rsvps}}</h2>
+
+        <p>{{status}}</p>
+
+        <div ng-repeat="tweet in tweets | orderBy:'-created_at' ">
+            <div class="row">
+                <div class="span pull-left no-space"><img class="" ng-src="{{tweet.user.profile_image_url}}"/></div>
+                <strong>{{tweet.user.name}}: </strong>
+
+                <p>{{tweet.text}}</p>
+
+                <p>{{tweet.entities[4]}}</p>
+
+
+            </div>
+        </div>
+    </div>
+</div>

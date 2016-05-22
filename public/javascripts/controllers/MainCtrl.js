@@ -25,19 +25,11 @@ app.factory('Socket', function($rootScope) {
 app.controller('MainCtrl', [
     '$scope','Socket','auth','$http','$sce',
     function($scope,Socket,auth,$http,$sce ){
-        $scope.tweets = [];
+
         var meetupKey = '5466443924e5a5d2d20417111623933';
         var googleKey = 'AIzaSyD-lu9UvVjk-OpVg6p12aEWixXX4HcWIYs';
         var groupName = 'nigmaio';
         var url = 'http://api.meetup.com/2/events.json?key=' + meetupKey + '&group_urlname='+ groupName + "&callback=JSON_CALLBACK";
-
-        Socket.on('newTweet',function(tweet) {
-
-            $scope.tweets.push(tweet);
-
-            $scope.status = 'Amount of Tweets Retrieved: ' + $scope.tweets.length;
-
-        });
 
         $scope.trustSrc = function(postcode) {
             return $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?q=" + postcode + "&key=" + googleKey);
