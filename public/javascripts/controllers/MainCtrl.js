@@ -29,7 +29,9 @@ app.controller('MainCtrl', [
         var meetupKey = '5466443924e5a5d2d20417111623933';
         var googleKey = 'AIzaSyD-lu9UvVjk-OpVg6p12aEWixXX4HcWIYs';
         var groupName = 'nigmaio';
-        var url = 'http://api.meetup.com/2/events.json?key=' + meetupKey + '&group_urlname='+ groupName + "&callback=JSON_CALLBACK";
+        var eventId = '229473852';
+        var url = 'http://api.meetup.com/2/events.json?key=' + meetupKey + '&event_id=' + eventId + "&callback=JSON_CALLBACK";
+        //var url = "http://api.meetup.com/nigmaio/events/" + eventId;
 
         $scope.trustSrc = function(postcode) {
             return $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?q=" + postcode + "&key=" + googleKey);
@@ -37,6 +39,7 @@ app.controller('MainCtrl', [
 
          $http.jsonp(url)
              .then(function(data) {
+                 console.log(data);
                 console.log("success");
                 $scope.events = data.data.results;
 

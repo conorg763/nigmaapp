@@ -26,5 +26,23 @@ app.controller('CodeCtrl',[
         $scope.incrementUpvotes = function (post) {
             posts.upvote(post);
         }
+
+
+        $scope.filterByCategory = function(post) {
+            if($scope.category === undefined) {
+                return true;
+            }
+            return post.categories.indexOf($scope.category) !== -1;
+        }
+
+        $scope.setFilterCategory = function(category) {
+            $scope.category = category;
+        }
+
+        $scope.unsetFilterCategory = function() {
+            $scope.category = undefined;
+        }
+
+
     }
 ]);

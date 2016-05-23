@@ -37,12 +37,14 @@ app.factory('posts', ['$http','auth',function($http,auth){
         });
     };
 
-    o.get = function(id) {
-        //use the express route to grab post and return res
-        return $http.get('/posts/' + id).then(function(res) {
-            return res.data;
-        })
-    };
+
+
+    //o.get = function(id) {
+    //    //use the express route to grab post and return res
+    //    return $http.get('/posts/' + id).then(function(res) {
+    //        return res.data;
+    //    })
+    //};
     //comments grabbed
     o.addComment = function(id, comment) {
         return $http.post('/posts/' + id + '/comments', comment, {

@@ -3,7 +3,7 @@
 
         <div  ng-show="isMeetupAvailable()" ng-repeat="event in events">
 
-            <h2>Next Nigma Event: </h2>
+            <h2>Last Nigma Event: </h2>
 
             <p><strong>Title: </strong> {{event.name}} </p>
 
@@ -13,7 +13,7 @@
 
             <p><strong>Time:</strong> {{event.time | date: 'HH:mm a'}} </p>
 
-            <p><strong>RSVP:</strong> We have {{event.yes_rsvp_count}} {{event.group.who}} with
+            <p><strong>RSVP:</strong> We had {{event.yes_rsvp_count}} {{event.group.who}} with
                 {{event.waitlist_count}} on the waiting list. </p>
 
             <iframe width="600" height="450" frameborder="0" style="border:0"
